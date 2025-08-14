@@ -1,0 +1,1 @@
+export default function MessageModal(){return <div>Mensagem</div>}

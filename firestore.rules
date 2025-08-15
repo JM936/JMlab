@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Ensaios (leitura pública, escrita apenas para admins)
+    match /ensaios/{ensaio} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Comentários (usuários logados podem criar)
+    match /comments/{comment} {
+      allow read: if true;
+      allow create: if isAuthenticated();
+      allow update, delete: if isOwner() || isAdmin();
+    }
+
+    // Dados de usuário (acesso restrito)
+    match /users/{userId} {
+      allow read, write: if isOwner() || isAdmin();
+    }
+
+    // Funções auxiliares
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    function isOwner() {
+      return request.auth.uid == resource.data.userId;
+    }
+    function isAdmin() {
+      return request.auth.token.admin == true;
+    }
+  }
+}

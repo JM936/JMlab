@@ -1,27 +1,24 @@
-const Navbar = ({ searchTerm, setSearchTerm, onSearch }) => {
+import React from 'react';
+import Link from 'next/link';
+
+const Navbar = () => {
   return (
-    <header className="bg-gray-900 shadow-lg">
-      <div className="container mx-auto px-4 py-4 flex flex-col md:flex-row items-center">
-        {/* Logo e links... */}
-        <div className="mt-4 md:mt-0 md:ml-auto w-full md:w-auto">
-          <div className="flex">
-            <input
-              type="text"
-              placeholder="Buscar ensaios ou artigos..."
-              className="px-4 py-2 rounded-l-lg bg-gray-800 text-white w-full"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && onSearch()}
-            />
-            <button 
-              onClick={onSearch}
-              className="bg-blue-600 px-4 py-2 rounded-r-lg"
-            >
-              Buscar
-            </button>
-          </div>
+    <nav className="bg-gray-800 p-4">
+      <div className="container mx-auto flex justify-between">
+        <Link href="/">
+          <a className="text-white font-bold">GeotechLab</a>
+        </Link>
+        <div className="flex space-x-4">
+          <Link href="/ensaios">
+            <a className="text-gray-300 hover:text-white">Ensaios</a>
+          </Link>
+          <Link href="/blog">
+            <a className="text-gray-300 hover:text-white">Blog</a>
+          </Link>
         </div>
       </div>
-    </header>
+    </nav>
   );
 };
+
+export default Navbar; // Exportação padrão adicionada

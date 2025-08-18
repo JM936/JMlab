@@ -1,16 +1,17 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useRouter } from 'next/router';
+import LoadingSpinner from '../components/LoadingSpinner'; // ajuste conforme sua estrutura
 
-const SearchResultsPage = ({ results, isLoading }) => {
-  const { state } = useLocation();
-  const query = state?.query || '';
+const SearchResultsPage = ({ results = [], isLoading = false }) => {
+  const router = useRouter();
+  const { query = '' } = router.query;
 
   return (
     <div className="container mx-auto py-8 px-4">
       <h1 className="text-3xl font-bold text-white mb-6">
         Resultados para: "{query}"
       </h1>
-      
+
       {isLoading ? (
         <div className="text-center py-10">
           <LoadingSpinner />

@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+// src/pages/ensaios/[ensaioId].jsx
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { collection, addDoc, query, orderBy, getDocs, onSnapshot, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebaseConfig'; // ajuste conforme sua estrutura
-
-// Componentes auxiliares (LaTeXRenderer, StarIcon, RevealOnScroll, SkeletonLoader) mantêm-se iguais
 
 const EnsaioDetailPage = ({ showMessage, userId, isAuthReady }) => {
   const router = useRouter();
@@ -106,10 +105,14 @@ const EnsaioDetailPage = ({ showMessage, userId, isAuthReady }) => {
     setRatingError('');
   };
 
-  // Renderização condicional mantida igual
-
   return (
-    // JSX completo da página, igual ao original
+    <main className="container mx-auto py-8 px-4 min-h-screen">
+      <div className="bg-gray-800 rounded-xl shadow-lg p-6 md:p-10">
+        <h1 className="text-3xl font-bold text-white mb-4">{ensaio?.title || 'Carregando...'}</h1>
+        <p className="text-gray-300 mb-6">{ensaio?.description}</p>
+        {/* Comentários e formulário */}
+      </div>
+    </main>
   );
 };
 
